@@ -10,7 +10,7 @@ class UserAdmin(UserAdmin):
 
 @admin.register(Ride)
 class RideAdmin(admin.ModelAdmin):
-    ...
+    list_display = ['rider', 'driver', 'status']
 
 
 @admin.register(RideEvent)
