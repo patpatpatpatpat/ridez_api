@@ -25,7 +25,7 @@ class UserViewSet(mixins.CreateModelMixin,
 
 
 class RideViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
-    queryset = Ride.objects.all()
+    queryset = Ride.objects.select_related("rider", "driver").prefetch_related("rideevent_set")
     serializer_class = RideSerializer
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend, OrderingFilter]
     filterset_fields = ['status', 'rider__email']
