@@ -1,13 +1,13 @@
 from rest_framework import serializers
-from .models import User
+from .models import User, Ride, RideEvent
 
 
 class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'first_name', 'last_name',)
-        read_only_fields = ('username', )
+        fields = ('id', 'username', 'first_name', 'last_name', 'email')
+        read_only_fields = ('username', 'email')
 
 
 class CreateUserSerializer(serializers.ModelSerializer):
@@ -23,3 +23,21 @@ class CreateUserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'password', 'first_name', 'last_name', 'email', 'auth_token',)
         read_only_fields = ('auth_token',)
         extra_kwargs = {'password': {'write_only': True}}
+
+
+class RideSerializer(serializers.ModelSerializer):
+    rider = UserSerializer()
+    driver = UserSerializer()
+
+    class Meta:
+        model = Ride
+        fields = [
+            "status",
+            "rider",
+            "driver",
+            "pickup_latitude",
+            "pickup_longitude",
+            "dropoff_latitude",
+            "dropoff_longitude",
+            "pickup_time",
+        ]
