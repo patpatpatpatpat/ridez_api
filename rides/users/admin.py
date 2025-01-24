@@ -5,7 +5,7 @@ from .models import User, Ride, RideEvent
 
 @admin.register(User)
 class UserAdmin(UserAdmin):
-    pass
+    list_display = ['username', 'email', 'role', 'first_name', 'last_name', 'phone_number']
 
 
 @admin.register(Ride)

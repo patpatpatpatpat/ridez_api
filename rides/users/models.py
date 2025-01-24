@@ -5,12 +5,13 @@ from django.dispatch import receiver
 from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save
 from rest_framework.authtoken.models import Token
-from .constants import RideStatus
+from .constants import RideStatus, Role
 
 
 class User(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     phone_number = models.CharField(max_length=255, blank=True, null=True)
+    role = models.CharField(max_length=10, choices=Role.choices)
 
     def __str__(self):
         return self.username
