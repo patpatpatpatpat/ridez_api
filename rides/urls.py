@@ -5,10 +5,11 @@ from django.contrib import admin
 from django.views.generic.base import RedirectView
 from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views
-from .users.views import UserViewSet
+from .users.views import UserViewSet, RideViewSet
 
 router = DefaultRouter()
 router.register(r'users', UserViewSet)
+router.register(r'rides', RideViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

@@ -1,7 +1,8 @@
 from rest_framework import viewsets, mixins
-from .models import User
+from .models import User, Ride
 from .permissions import IsUserOrCreatingAccountOrReadOnly
-from .serializers import CreateUserSerializer, UserSerializer
+from .serializers import CreateUserSerializer, UserSerializer, RideSerializer
+import django_filters.rest_framework
 
 
 class UserViewSet(mixins.CreateModelMixin,
@@ -20,3 +21,10 @@ class UserViewSet(mixins.CreateModelMixin,
         if is_creating_a_new_user:
             return CreateUserSerializer
         return self.serializer_class
+
+
+class RideViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+    queryset = Ride.objects.all()
+    serializer_class = RideSerializer
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
+    filterset_fields = ['status', 'rider__email']
