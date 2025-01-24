@@ -3,6 +3,7 @@ from .models import User, Ride
 from .permissions import IsUserOrCreatingAccountOrReadOnly
 from .serializers import CreateUserSerializer, UserSerializer, RideSerializer
 import django_filters.rest_framework
+from rest_framework.filters import OrderingFilter
 
 
 class UserViewSet(mixins.CreateModelMixin,
@@ -26,5 +27,6 @@ class UserViewSet(mixins.CreateModelMixin,
 class RideViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = Ride.objects.all()
     serializer_class = RideSerializer
-    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend, OrderingFilter]
     filterset_fields = ['status', 'rider__email']
+    ordering_fields = ['pickup_time']
