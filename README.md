@@ -21,3 +21,11 @@ Run a command inside the docker container:
 ```bash
 docker-compose run --rm web [command]
 ```
+
+Examples
+```bash
+docker-compose run --rm web python manage.py showmigrations
+docker-compose run --rm web python manage.py migrate
+docker-compose run --rm web python manage.py makemigrations
+docker-compose run --rm web python manage.py createsuperuser
+```
