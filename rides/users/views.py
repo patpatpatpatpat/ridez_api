@@ -5,7 +5,6 @@ from .serializers import CreateUserSerializer, UserSerializer, RideSerializer
 import django_filters.rest_framework
 from rest_framework.filters import OrderingFilter
 
-
 class UserViewSet(mixins.CreateModelMixin,
                   mixins.RetrieveModelMixin,
                   mixins.UpdateModelMixin,

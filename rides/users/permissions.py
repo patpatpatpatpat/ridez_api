@@ -1,4 +1,5 @@
 from rest_framework import permissions
+from .constants import Role
 
 
 class IsUserOrCreatingAccountOrReadOnly(permissions.BasePermission):
@@ -18,3 +19,12 @@ class IsUserOrCreatingAccountOrReadOnly(permissions.BasePermission):
 
         is_accessing_their_own_user_object = obj == request.user
         return is_accessing_their_own_user_object
+
+
+
+class IsAdmin(permissions.BasePermission):
+    def has_permission(self, request, view):
+        if request.user.is_authenticated:
+            return request.user.role == Role.ADMIN
+
+        return False
