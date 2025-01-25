@@ -24,7 +24,4 @@ class IsUserOrCreatingAccountOrReadOnly(permissions.BasePermission):
 
 class IsAdmin(permissions.BasePermission):
     def has_permission(self, request, view):
-        if request.user.is_authenticated:
-            return request.user.role == Role.ADMIN
-
-        return False
+        return request.user.role == Role.ADMIN
